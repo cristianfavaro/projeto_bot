@@ -51,18 +51,23 @@ class Dispatcher:
             self.handlers.setdefault(handler.__class__.__name__ , []).append(handler)
 
     def handle_conversation_update(self, conversation_context, update):
-        print('avaliando os handlers de conversa ', self.handlers)
+        
+        old_handlers = self.handlers
+
         conversation = next( 
             (item for item in self.handlers["ConversationHandler"] if item.name == conversation_context[0].name),
             False,
         )
+
         if conversation:
             print('passei aqui no conversation')
             conversation.toggle_conversation() #apagando o registro da conversa apra nao entrar em loop
             self.handlers = {}
             print(' vendos e apagou os handlers', self.handlers)
             self.add_handlers(conversation.states)
-            return self.process_update(update)
+            self.process_update(update)
+        
+        self.handlers = old_handlers
 
     def process_update(self, update):
         import itertools

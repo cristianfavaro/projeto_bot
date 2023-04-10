@@ -4,8 +4,6 @@ from bot.models import UserTelegram
 import json
 from django.test import Client
 from django.urls import reverse
-from bot.dispatcher import Update
-from bot.telegram import dispatcher
 from unittest import mock
 
 
@@ -61,11 +59,6 @@ class TestTelegram(TestCase):
         self.simple_message['message']['text'] = '/empresas'
         response = self.c.post(reverse('event'), json.dumps(self.simple_message), content_type='application/json') 
         print(response.json())
-
-
-
-
-
 
         # test que retornou apenas uma palavra.
         # content = json.loads(response.content)
