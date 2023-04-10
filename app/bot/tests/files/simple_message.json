@@ -1,0 +1,19 @@
+{"update_id": 271209054,
+ "message": {"message_id": 1534,
+  "from": {
+    "id": 867670869,
+    "is_bot": false,
+    "first_name": "Cristian",
+    "last_name": "Favaro",
+    "username": "cristianfavaro",
+    "language_code": "pt-br"
+    },
+  "chat": {"id": 867670869,
+   "first_name": "Cristian",
+   "last_name": "Favaro",
+   "username": "cristianfavaro",
+   "type": "private"
+},
+  "date": 1617468672,
+  "text": "/empresas",
+  "entities": [{"offset": 0, "length": 9, "type": "bot_command"}]}}

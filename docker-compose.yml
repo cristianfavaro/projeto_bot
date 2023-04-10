@@ -1,0 +1,57 @@
+version: "3.7"
+
+volumes:
+  db_django:
+
+networks:
+  frontend: # Front end Virtual Network for 'proxy', and 'app' Containers
+  backend: # Back end Virtual Network for 'app', 'db', and 'pgadmin' Containers
+
+services:
+  db: # DB Engine Container
+    env_file: 
+      - .env
+    image: postgres:12
+    restart: always
+    volumes:
+      - db_django:/var/lib/postgresql/data # Mount Volume to Postgres Data directory
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+    networks:
+      - backend
+    command: postgres -c log_destination=stderr -c log_statement=all
+
+  pgadmin: # PGAdmin Container - PostgreSQL GUI Admin
+    env_file: ./app/.env
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    networks:
+      - backend
+      
+  app: # Django Application Server Container 
+    image: mydjango:psql
+    restart: always
+    volumes:
+      - ./app:/app
+      - ./app/app/static:/app/app/static
+    build:
+      context: .
+      dockerfile: Dockerfile   
+    #take this off on production
+    ports: 
+        - "8000:8000"
+    command: >
+        sh -c "python manage.py runserver 0.0.0.0:8000"
+    #### up to here off
+
+    networks:
+      - frontend
+      - backend
