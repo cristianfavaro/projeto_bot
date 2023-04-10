@@ -55,10 +55,6 @@ class CallbackContext:
         return update
     
 
-class InlineKeyboardMarkup:
-    pass
-
-
 class User:
     pass
 
@@ -109,7 +105,7 @@ class Message:
 
         return Message(data, bot) # tirei o bot daqui tbm bot=bot
 
-    def reply_text(self, text):
-        self.bot.sendMessage(self.chat.get("id"), text)
+    def reply_text(self, text, reply_markup=None, parse_mode="Markdown"):
+        self.bot.sendMessage(self.chat.get("id"), text, reply_markup=reply_markup)
 
 
