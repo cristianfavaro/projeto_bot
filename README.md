@@ -1,7 +1,7 @@
 # Bot Telegram
 
 Trabalho desenvolvido na disciplina Algoritmos de Automação, ministrada pelo professor 
-Álvaro Justen (@turicas). 
+Álvaro Justen (@turicas), no Master em Jornalismo de Dados do Insper. 
 
 ##O projeto
 O projeto consiste em criar uma ferramenta para administrar facilmente o telegram no Django. O código foi baseado na estrutura da lib python-telegram-bot.
