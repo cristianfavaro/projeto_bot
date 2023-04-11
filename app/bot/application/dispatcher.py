@@ -52,7 +52,7 @@ class Dispatcher:
 
     def handle_conversation_update(self, conversation_context, update):
         
-        old_handlers = self.handlers
+        temp_handlers = self.handlers
 
         conversation = next( 
             (item for item in self.handlers["ConversationHandler"] if item.name == conversation_context[0].name),
@@ -60,14 +60,12 @@ class Dispatcher:
         )
 
         if conversation:
-            print('passei aqui no conversation')
             conversation.toggle_conversation() #apagando o registro da conversa apra nao entrar em loop
             self.handlers = {}
-            print(' vendos e apagou os handlers', self.handlers)
             self.add_handlers(conversation.states)
             self.process_update(update)
         
-        self.handlers = old_handlers
+        self.handlers = temp_handlers
 
     def process_update(self, update):
         import itertools

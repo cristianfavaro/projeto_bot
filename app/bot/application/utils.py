@@ -1,4 +1,3 @@
-
 class Handler: 
     def check_update(self, update):
         if update.message:
@@ -54,10 +53,6 @@ class CallbackContext:
         update = cls(dispatcher, update)      
         return update
     
-
-class User:
-    pass
-
 
 class CallbackQuery:
     def de_json(self, update=None):

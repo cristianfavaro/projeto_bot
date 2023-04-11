@@ -12,10 +12,10 @@ def start(update, context):
 dispatcher.add_handler(CommandHandler("start", start))
 
 
-# def teste2(update, context):
-#     text = "novo teste"
-#     update.message.reply_text(text=text) 
-# dispatcher.add_handler(CommandHandler("teste2", teste2))
+def teste2(update, context):
+    text = "novo teste"
+    update.message.reply_text(text=text) 
+dispatcher.add_handler(CommandHandler("teste2", teste2))
 
 
 # def help(update, context):
